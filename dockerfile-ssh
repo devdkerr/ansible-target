@@ -1,0 +1,19 @@
+FROM ubuntu:14.04.4
+MAINTAINER Daniel R. Kerr <daniel.r.kerr@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update -y \
+ && apt-get install -qq -y apt-offline openssh-server \
+ && apt-get install -qq -y python python-dev python-pip \
+ && apt-get install -qq -y python-apt \
+ && apt-get clean \
+ && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+RUN mkdir /var/run/sshd \
+ && echo 'root:root' | chpasswd \
+ && sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config \
+ && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+WORKDIR /root
+CMD ["/usr/sbin/sshd", "-D"]
