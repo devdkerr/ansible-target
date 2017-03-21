@@ -1,13 +1,13 @@
-FROM ubuntu:14.04.4
+FROM ubuntu:trusty
 MAINTAINER Daniel R. Kerr <daniel.r.kerr@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update -y \
+RUN apt-get update -qq -y \
  && apt-get install -qq -y apt-offline openssh-server \
- && apt-get install -qq -y python python-dev python-pip \
- && apt-get install -qq -y python-apt \
- && apt-get clean \
+ && apt-get install -qq -y python python-apt python-dev python-pip \
+ && apt-get clean -qq -y \
+ && apt-get purge -qq -y \
  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 RUN mkdir /var/run/sshd \
