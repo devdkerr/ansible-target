@@ -2,6 +2,13 @@
 
 Docker container to be managed with ansible for production or testing of Ansible modules, playbooks, or roles.
 
+## build
+
+```shell
+docker build --file dockerfile-docker --tag devdkerr/ansible-target:docker .
+docker build --file dockerfile-ssh --tag devdkerr/ansible-target:ssh .
+```
+
 ## via SSH Connection
 
 To start a container to be managed via the default Ansible ssh connection type, executed the following:

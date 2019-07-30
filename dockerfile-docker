@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 MAINTAINER Daniel R. Kerr <daniel.r.kerr@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
